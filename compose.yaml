@@ -2,8 +2,7 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: frontend/Dockerfile
+      context: ./frontend
     container_name: taskflow-frontend
     ports:
       - "8080:80"
@@ -18,10 +17,13 @@ services:
     environment:
       PORT: 3000
       MONGODB_URI: mongodb://mongodb:27017/taskflow
+      REDIS_URL: redis://redis:6379
     ports:
       - "3000:3000"
     depends_on:
       mongodb:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     restart: unless-stopped
 
@@ -37,5 +39,19 @@ services:
       retries: 5
     restart: unless-stopped
 
+  redis:
+    image: redis:8-alpine
+    container_name: taskflow-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
 volumes:
   mongodb_data:
+  redis_data:
