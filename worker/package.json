@@ -1,0 +1,12 @@
+{
+  "name": "taskflow-worker",
+  "version": "1.0.0",
+  "description": "TaskFlow background worker",
+  "main": "src/worker.js",
+  "scripts": {
+    "start": "node src/worker.js"
+  },
+  "dependencies": {
+    "redis": "^5.8.2"
+  }
+}

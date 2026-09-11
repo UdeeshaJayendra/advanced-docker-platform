@@ -62,4 +62,18 @@ app.get("/api/cache-test", async (req, res) => {
   });
 });
 
+app.post("/api/jobs", async (req, res) => {
+  const job = {
+    type: "task-created",
+    timestamp: new Date().toISOString()
+  };
+
+  await redisClient.lPush("taskflow:jobs", JSON.stringify(job));
+
+  res.status(202).json({
+    message: "Job queued successfully",
+    job
+  });
+});
+
 startServer();
