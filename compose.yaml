@@ -31,6 +31,9 @@ services:
     restart: unless-stopped
     security_opt:
      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+     - /tmp
     mem_limit: 512m
     cpus: "0.50"
     healthcheck:
@@ -85,6 +88,9 @@ services:
     restart: unless-stopped
     security_opt:
      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
     mem_limit: 256m
     cpus: "0.25"
     healthcheck:
