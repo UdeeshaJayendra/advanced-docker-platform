@@ -10,6 +10,8 @@ services:
       backend:
         condition: service_healthy
     restart: unless-stopped
+    mem_limit: 128m
+    cpus: "0.25"
 
   backend:
     build:
@@ -27,6 +29,10 @@ services:
       redis:
         condition: service_healthy
     restart: unless-stopped
+    security_opt:
+     - no-new-privileges:true
+    mem_limit: 512m
+    cpus: "0.50"
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/health"]
       interval: 10s
@@ -45,6 +51,10 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    cpus: "0.50"
 
   redis:
     image: redis:8-alpine
@@ -58,6 +68,10 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: "0.25"
 
   worker:
     build:
@@ -69,6 +83,10 @@ services:
       redis:
         condition: service_healthy
     restart: unless-stopped
+    security_opt:
+     - no-new-privileges:true
+    mem_limit: 256m
+    cpus: "0.25"
     healthcheck:
       test: ["CMD", "node", "-e", "process.exit(0)"]
       interval: 10s
