@@ -5,7 +5,7 @@ function App() {
   const [backendStatus, setBackendStatus] = useState("Checking...");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/health")
+    fetch("/api/health")
       .then((response) => response.json())
       .then((data) => {
         setBackendStatus(`${data.status} — ${data.service}`);
