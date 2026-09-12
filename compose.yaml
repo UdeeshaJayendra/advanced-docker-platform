@@ -19,8 +19,10 @@ services:
     container_name: taskflow-backend
     environment:
       PORT: 3000
-      MONGODB_URI: mongodb://mongodb:27017/taskflow
+      MONGODB_URI_FILE: /run/secrets/mongodb_uri
       REDIS_URL: redis://redis:6379
+    secrets:
+      - mongodb_uri
     ports:
       - "3000:3000"
     depends_on:
@@ -48,6 +50,10 @@ services:
   mongodb:
     image: mongo:8
     container_name: taskflow-mongodb
+    command:
+      - mongod
+      - --auth
+      - --bind_ip_all
     environment:
       MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_username
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_password
@@ -117,5 +123,9 @@ volumes:
 secrets:
   mongo_username:
     file: ./secrets/mongo_username.txt
+
   mongo_password:
     file: ./secrets/mongo_password.txt
+
+  mongodb_uri:
+    file: ./secrets/mongodb_uri.txt
