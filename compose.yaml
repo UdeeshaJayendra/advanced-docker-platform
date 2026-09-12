@@ -6,6 +6,8 @@ services:
     container_name: taskflow-frontend
     ports:
       - "8080:80"
+    networks:
+      - public
     depends_on:
       backend:
         condition: service_healthy
@@ -24,8 +26,9 @@ services:
     secrets:
       - mongodb_uri
       - redis_url
-    ports:
-      - "3000:3000"
+    networks:
+      - public
+      - internal
     depends_on:
       mongodb:
         condition: service_healthy
@@ -60,6 +63,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_password
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - internal
     secrets:
       - mongo_username
       - mongo_password
@@ -83,6 +88,8 @@ services:
       - redis-server --appendonly yes --requirepass "$$(cat /run/secrets/redis_password)"
     volumes:
       - redis_data:/data
+    networks:
+      - internal
     secrets:
       - redis_password
     healthcheck:
@@ -110,6 +117,8 @@ services:
       REDIS_URL_FILE: /run/secrets/redis_url
     secrets:
       - redis_url
+    networks:
+      - internal
     depends_on:
       redis:
         condition: service_healthy
@@ -133,6 +142,14 @@ services:
 volumes:
   mongodb_data:
   redis_data:
+
+networks:
+  public:
+    name: taskflow-public
+
+  internal:
+    name: taskflow-internal
+    internal: true
 
 secrets:
   mongo_username:
