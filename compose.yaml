@@ -154,12 +154,6 @@ services:
       - /tmp
     mem_limit: 256m
     cpus: "0.25"
-    healthcheck:
-      test: ["CMD", "node", "-e", "process.exit(0)"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
     logging:
       driver: "json-file"
       options:
