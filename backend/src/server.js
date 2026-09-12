@@ -4,6 +4,7 @@ require("dotenv").config();
 
 
 const app = express();
+const { sendTestEmail } = require("./config/email");
 const connectDatabase = require("./config/database");
 const { redisClient, connectRedis } = require("./config/redis");
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,23 @@ app.get("/api/health", (req, res) => {
     status: "healthy",
     service: "taskflow-backend"
   });
+});
+
+app.post("/api/email-test", async (req, res) => {
+  try {
+    const info = await sendTestEmail();
+
+    res.status(202).json({
+      message: "Test email sent successfully",
+      messageId: info.messageId
+    });
+  } catch (error) {
+    console.error("Email sending failed:", error.message);
+
+    res.status(500).json({
+      message: "Email sending failed"
+    });
+  }
 });
 
 app.listen(PORT, () => {

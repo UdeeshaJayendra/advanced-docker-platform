@@ -28,6 +28,8 @@ services:
       PORT: 3000
       MONGODB_URI_FILE: /run/secrets/mongodb_uri
       REDIS_URL_FILE: /run/secrets/redis_url
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
     secrets:
       - mongodb_uri
       - redis_url
