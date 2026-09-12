@@ -3,7 +3,10 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "mailpit",
   port: Number(process.env.SMTP_PORT || 1025),
-  secure: false
+  secure: false,
+  connectionTimeout: 5000,
+  greetingTimeout: 5000,
+  socketTimeout: 5000
 });
 
 const sendTestEmail = async () => {
