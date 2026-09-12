@@ -1,7 +1,20 @@
+const fs = require("fs");
 const { createClient } = require("redis");
 
+const getRedisUrl = () => {
+  if (process.env.REDIS_URL) {
+    return process.env.REDIS_URL;
+  }
+
+  if (process.env.REDIS_URL_FILE) {
+    return fs.readFileSync(process.env.REDIS_URL_FILE, "utf8").trim();
+  }
+
+  throw new Error("REDIS_URL or REDIS_URL_FILE is required");
+};
+
 const redisClient = createClient({
-  url: process.env.REDIS_URL || "redis://localhost:6379"
+  url: getRedisUrl()
 });
 
 redisClient.on("error", (error) => {
