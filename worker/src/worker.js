@@ -21,14 +21,20 @@ redisClient.on("error", (error) => {
   console.error("Redis connection error:", error.message);
 });
 
+let shuttingDown = false;
+
 const startWorker = async () => {
   await redisClient.connect();
 
   console.log("TaskFlow worker connected to Redis");
   console.log("TaskFlow worker is waiting for jobs");
 
-  while (true) {
-    const job = await redisClient.brPop("taskflow:jobs", 0);
+  while (!shuttingDown) {
+    const job = await redisClient.brPop("taskflow:jobs", 2);
+
+    if (shuttingDown) {
+      break;
+    }
 
     if (job) {
       console.log(`Processing job: ${job.element}`);
@@ -40,4 +46,31 @@ const startWorker = async () => {
   }
 };
 
-startWorker();
+const gracefulShutdown = async (signal) => {
+  if (shuttingDown) {
+    return;
+  }
+
+  shuttingDown = true;
+
+  console.log(`${signal} received. Starting worker shutdown...`);
+
+  try {
+    if (redisClient.isOpen) {
+      await redisClient.quit();
+      console.log("Worker Redis connection closed");
+    }
+  } catch (error) {
+    console.error("Worker Redis shutdown error:", error.message);
+  }
+
+  process.exit(0);
+};
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+
+startWorker().catch((error) => {
+  console.error("Worker startup failed:", error.message);
+  process.exit(1);
+});
