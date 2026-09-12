@@ -33,3 +33,6 @@ docker-data/
 *.pem
 *.key
 *.crt
+
+# Local Docker secrets
+/secrets/
