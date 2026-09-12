@@ -2,13 +2,12 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-
 const app = express();
 const { sendTestEmail } = require("./config/email");
 const connectDatabase = require("./config/database");
 const { redisClient, connectRedis } = require("./config/redis");
-const PORT = process.env.PORT || 3000;
 
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -41,10 +40,6 @@ app.post("/api/email-test", async (req, res) => {
       message: "Email sending failed"
     });
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`TaskFlow API running on port ${PORT}`);
 });
 
 const startServer = async () => {
