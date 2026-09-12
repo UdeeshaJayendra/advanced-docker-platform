@@ -4,7 +4,10 @@ require("dotenv").config();
 
 const app = express();
 const { sendTestEmail } = require("./config/email");
-const connectDatabase = require("./config/database");
+const {
+  connectDatabase,
+  disconnectDatabase
+} = require("./config/database");
 const { redisClient, connectRedis } = require("./config/redis");
 
 const PORT = process.env.PORT || 3000;
@@ -42,11 +45,13 @@ app.post("/api/email-test", async (req, res) => {
   }
 });
 
+let server;
+
 const startServer = async () => {
   await connectDatabase();
   await connectRedis();
 
-  app.listen(PORT, () => {
+  server = app.listen(PORT, () => {
     console.log(`TaskFlow API running on port ${PORT}`);
   });
 };
@@ -90,3 +95,31 @@ app.post("/api/jobs", async (req, res) => {
 });
 
 startServer();
+
+const gracefulShutdown = async (signal) => {
+  console.log(`${signal} received. Starting graceful shutdown...`);
+
+  if (server) {
+    server.close(() => {
+      console.log("HTTP server closed");
+    });
+  }
+
+  try {
+    await redisClient.quit();
+    console.log("Redis connection closed");
+  } catch (error) {
+    console.error("Redis shutdown error:", error.message);
+  }
+
+  try {
+    await disconnectDatabase();
+  } catch (error) {
+    console.error("MongoDB shutdown error:", error.message);
+  }
+
+  process.exit(0);
+};
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
