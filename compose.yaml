@@ -137,6 +137,8 @@ services:
     container_name: taskflow-worker
     environment:
       REDIS_URL_FILE: /run/secrets/redis_url
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
     secrets:
       - redis_url
     networks:
@@ -159,6 +161,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
   mailpit:
     image: axllent/mailpit:latest
     container_name: taskflow-mailpit
@@ -167,6 +170,7 @@ services:
       - "1025:1025"
     networks:
       - internal
+      - public
     profiles:
       - dev
     restart: unless-stopped

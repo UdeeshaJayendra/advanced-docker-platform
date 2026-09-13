@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { createClient } = require("redis");
+const { sendJobEmail } = require("./email");
 
 const getRedisUrl = () => {
   if (process.env.REDIS_URL) {
@@ -37,11 +38,19 @@ const startWorker = async () => {
     }
 
     if (job) {
-      console.log(`Processing job: ${job.element}`);
+      try {
+        const parsedJob = JSON.parse(job.element);
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log(`Processing job: ${job.element}`);
 
-      console.log(`Job completed: ${job.element}`);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        await sendJobEmail(parsedJob);
+
+        console.log(`Job completed: ${job.element}`);
+      } catch (error) {
+        console.error("Job processing failed:", error.message);
+      }
     }
   }
 };

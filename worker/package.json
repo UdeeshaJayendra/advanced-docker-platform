@@ -7,6 +7,7 @@
     "start": "node src/worker.js"
   },
   "dependencies": {
+    "nodemailer": "^10.0.9",
     "redis": "^5.8.2"
   }
 }
