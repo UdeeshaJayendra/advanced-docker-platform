@@ -1,0 +1,37 @@
+name: Docker CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  docker-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create CI secret files
+        run: |
+          mkdir -p secrets
+          printf '%s\n' 'ci_admin' > secrets/mongo_username.txt
+          printf '%s\n' 'ci_password' > secrets/mongo_password.txt
+          printf '%s\n' 'mongodb://ci_admin:ci_password@mongodb:27017/taskflow?authSource=admin' > secrets/mongodb_uri.txt
+          printf '%s\n' 'ci_redis_password' > secrets/redis_password.txt
+          printf '%s\n' 'redis://:ci_redis_password@redis:6379' > secrets/redis_url.txt
+
+      - name: Validate Docker Compose
+        run: docker compose --profile dev config -q
+
+      - name: Build backend image
+        run: docker build -t taskflow-backend:ci ./backend
+
+      - name: Build frontend image
+        run: docker build -t taskflow-frontend:ci ./frontend
+
+      - name: Build worker image
+        run: docker build -t taskflow-worker:ci ./worker
