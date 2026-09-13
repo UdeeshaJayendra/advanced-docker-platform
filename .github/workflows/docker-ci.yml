@@ -35,3 +35,27 @@ jobs:
 
       - name: Build worker image
         run: docker build -t taskflow-worker:ci ./worker
+
+      - name: Scan backend image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: taskflow-backend:ci
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
+
+      - name: Scan frontend image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: taskflow-frontend:ci
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
+
+      - name: Scan worker image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: taskflow-worker:ci
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
