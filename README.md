@@ -24,46 +24,7 @@ The project demonstrates how application services can communicate through isolat
 ---
 
 ##  System Architecture
-<img width="2720" height="2800" alt="taskflow_architecture" src="https://github.com/user-attachments/assets/78e8baef-c33f-43b9-81bd-a501fe5662ea" />
 <img width="540" height="567" alt="image" src="https://github.com/user-attachments/assets/3e4b008c-7341-4912-8050-f4bf7a484708" />
-
-```text
-                         ┌──────────────────────┐
-                         │     TaskFlow UI      │
-                         │     React + Vite     │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │        Nginx         │
-                         │ Reverse Proxy / Web  │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │     Backend API      │
-                         │   Node.js + Express  │
-                         └───────┬────────┬─────┘
-                                 │        │
-                    ┌────────────┘        └─────────────┐
-                    ▼                                   ▼
-          ┌──────────────────┐                 ┌──────────────────┐
-          │     MongoDB      │                 │      Redis       │
-          │ Persistent Data  │                 │ Cache / Job Queue│
-          └──────────────────┘                 └────────┬─────────┘
-                                                        │
-                                                        ▼
-                                             ┌────────────────────┐
-                                             │ Background Worker  │
-                                             │     Node.js        │
-                                             └─────────┬──────────┘
-                                                       │
-                                                       ▼
-                                             ┌────────────────────┐
-                                             │      Mailpit       │
-                                             │  Email Testing     │
-                                             └────────────────────┘
-```
 
 #  Project Evidence
 
