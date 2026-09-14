@@ -24,6 +24,7 @@ The project demonstrates how application services can communicate through isolat
 ---
 
 ##  System Architecture
+<img width="2720" height="2800" alt="taskflow_architecture" src="https://github.com/user-attachments/assets/78e8baef-c33f-43b9-81bd-a501fe5662ea" />
 
 ```text
                          ┌──────────────────────┐
@@ -84,7 +85,7 @@ Selected screenshots demonstrating the major project milestones are included bel
 <img width="1312" height="245" alt="03-docker-compose-backend-mongodb-connected" src="https://github.com/user-attachments/assets/23fc7a12-9559-4ede-b1f2-b5be56174a02" />
 
 ## Complete Stack Health
-<img width="1312" height="245" alt="03-docker-compose-backend-mongodb-connected" src="https://github.com/user-attachments/assets/f1a8be83-c102-46b9-b01d-5ba66863bfa5" />
+<img width="1566" height="335" alt="3 taskflow-full-stack-healthy" src="https://github.com/user-attachments/assets/a95825e9-ce3c-4351-a241-7abb6b23d637" />
 
 ## GitHub Actions Docker CI
 <img width="1913" height="517" alt="04 github-actions-docker-ci-success" src="https://github.com/user-attachments/assets/4e8fc386-4290-4833-bb10-33534b63ef94" />
