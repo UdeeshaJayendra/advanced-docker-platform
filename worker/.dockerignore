@@ -1,5 +1,10 @@
 node_modules
-npm-debug.log
+npm-debug.log*
 .env
+.env.*
 .git
 .gitignore
+coverage
+*.log
+.DS_Store
+Thumbs.db
