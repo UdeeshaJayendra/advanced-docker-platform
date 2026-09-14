@@ -87,8 +87,7 @@ Selected screenshots demonstrating the major project milestones are included bel
 <img width="1312" height="245" alt="03-docker-compose-backend-mongodb-connected" src="https://github.com/user-attachments/assets/f1a8be83-c102-46b9-b01d-5ba66863bfa5" />
 
 ## GitHub Actions Docker CI
-
-<img width="1885" height="727" alt="3-taskflow-crud-delete-task png" src="https://github.com/user-attachments/assets/605bb1f3-9684-450c-a4aa-f5ea7d403a65" />
+<img width="1913" height="517" alt="04 github-actions-docker-ci-success" src="https://github.com/user-attachments/assets/4e8fc386-4290-4833-bb10-33534b63ef94" />
 <img width="1602" height="678" alt="05  github-actions-docker-ci-success" src="https://github.com/user-attachments/assets/c66bddd7-a6bf-49d8-8d71-414711dd0675" />
 <img width="1885" height="913" alt="06 github-actions-docker-ci-success" src="https://github.com/user-attachments/assets/b5167aa8-e2dc-437e-a8ad-7a03bdf8d2f5" />
 
