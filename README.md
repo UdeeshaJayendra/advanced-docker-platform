@@ -24,7 +24,7 @@ The project demonstrates how application services can communicate through isolat
 ---
 
 ##  System Architecture
-<img width="540" height="567" alt="image" src="https://github.com/user-attachments/assets/3e4b008c-7341-4912-8050-f4bf7a484708" />
+<img width="900" height="805" alt="taskflow_architecture" src="https://github.com/user-attachments/assets/03eb4620-f1c4-4e64-8e22-5ba7e8c0a7e4" />
 
 #  Project Evidence
 
