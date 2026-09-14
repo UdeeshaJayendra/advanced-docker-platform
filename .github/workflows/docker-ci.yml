@@ -59,3 +59,43 @@ jobs:
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
+
+      - name: Start TaskFlow stack
+        run: docker compose --profile dev up -d
+
+      - name: Wait for TaskFlow backend
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://localhost:8080/api/health; then
+              echo "TaskFlow backend is healthy"
+              exit 0
+            fi
+
+            echo "Waiting for TaskFlow backend..."
+            sleep 2
+          done
+
+          docker compose --profile dev ps
+          docker compose --profile dev logs
+          exit 1
+
+      - name: Test background job processing
+        run: |
+          curl -fsS -X POST http://localhost:8080/api/jobs
+
+          for i in {1..15}; do
+            if docker compose logs worker 2>&1 | grep -q "Job completed:"; then
+              echo "Background job processed successfully"
+              exit 0
+            fi
+
+            echo "Waiting for background job..."
+            sleep 2
+          done
+
+          docker compose logs worker --tail=50
+          exit 1
+
+      - name: Stop TaskFlow stack
+        if: always()
+        run: docker compose --profile dev down
