@@ -72,7 +72,7 @@ Selected screenshots demonstrating the major project milestones are included bel
 
 ## Dashboard and CRUD Delete Workflow
 <img width="1773" height="695" alt="image" src="https://github.com/user-attachments/assets/a2f52209-2daa-4ff9-a88d-bdcafb8474a3" />
-<img width="1773" height="695" alt="image" src="https://github.com/user-attachments/assets/018a2750-0bb2-42a9-b110-d6cfb1a7319a" />
+<img width="1800" height="673" alt="3 1-taskflow-crud-delete-task png" src="https://github.com/user-attachments/assets/1990cca5-5bff-4d4c-86e7-c27e0970ecd9" />
 
 ## Mailpit Background Email
 <img width="1913" height="493" alt="09 taskflow-mailpit-test-email" src="https://github.com/user-attachments/assets/6598ac9e-2bf4-4bc9-acca-8707da32609c" />
