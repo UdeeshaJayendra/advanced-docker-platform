@@ -71,8 +71,8 @@ Selected screenshots demonstrating the major project milestones are included bel
 <img width="1575" height="537" alt="01-docker-backend-image-build" src="https://github.com/user-attachments/assets/082c5ea4-5ec8-4362-862e-e7d204bd1fa1" />
 
 ## Dashboard and CRUD Delete Workflow
-<img width="1885" height="727" alt="3-taskflow-crud-delete-task png" src="https://github.com/user-attachments/assets/bbf45f2b-b0f3-4b3a-8a70-eec6cc88f4a9" />
-<img width="1885" height="727" alt="3-taskflow-crud-delete-task png" src="https://github.com/user-attachments/assets/b7730da5-b29b-49c4-93a3-fcb8b8e7f336" />
+<img width="1773" height="695" alt="image" src="https://github.com/user-attachments/assets/a2f52209-2daa-4ff9-a88d-bdcafb8474a3" />
+<img width="1773" height="695" alt="image" src="https://github.com/user-attachments/assets/018a2750-0bb2-42a9-b110-d6cfb1a7319a" />
 
 ## Mailpit Background Email
 <img width="1913" height="493" alt="09 taskflow-mailpit-test-email" src="https://github.com/user-attachments/assets/6598ac9e-2bf4-4bc9-acca-8707da32609c" />
