@@ -33,7 +33,7 @@ Selected screenshots demonstrating the major project milestones are included bel
 ## Docker Backend Image
 <img width="1575" height="537" alt="01-docker-backend-image-build" src="https://github.com/user-attachments/assets/082c5ea4-5ec8-4362-862e-e7d204bd1fa1" />
 
-## Dashboard and CRUD Delete Workflow
+## Dashboard and CRUD Workflow
 <img width="1885" height="727" alt="Component 5" src="https://github.com/user-attachments/assets/d6b0a879-f28b-4886-9133-77d7a0e5bec6" />
 <img width="1800" height="673" alt="3 1-taskflow-crud-delete-task png" src="https://github.com/user-attachments/assets/1990cca5-5bff-4d4c-86e7-c27e0970ecd9" />
 
